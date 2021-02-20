@@ -22,7 +22,7 @@ export function ContentsTabs() {
     ]);
 
     return (
-        <div class="contents-tabs">
+        <div className="contents-tabs">
             <Tabs vertical>
                 {sections.map(function(s) {
                     return (
