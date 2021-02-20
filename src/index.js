@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './pages/App';
+import 'normalize.css/normalize.css';
 import '@blueprintjs/core/lib/css/blueprint.css';
 import { FocusStyleManager } from "@blueprintjs/core";
 
-FocusStyleManager.onlyShowFocusOnTabs();
+import './index.css';
+import App from './pages/App';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,3 +13,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+FocusStyleManager.onlyShowFocusOnTabs();

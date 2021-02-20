@@ -1,26 +1,20 @@
 import './App.css';
-import { Navbar, NavbarDivider, NavbarGroup, Button, Alignment } from "@blueprintjs/core";
+import { MenuBar } from '../components/menu-bar';
+import { FileTabs } from '../components/file-tabs';
+import { ContentsTabs } from '../components/contents-tabs';
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
 
-      <Navbar>
-          <Navbar.Group align={Alignment.LEFT}>
-              <Navbar.Heading>Tacho Viewer</Navbar.Heading>
-          </Navbar.Group>
-          <Navbar.Group align={Alignment.RIGHT}>
-              <Button className="bp3-minimal" icon="menu" />
-          </Navbar.Group>
-      </Navbar>
+      <MenuBar />
+      <FileTabs />
+      <div class="file-contents">
+        <div class="file-sections">
+          <ContentsTabs></ContentsTabs>
+        </div>
+      </div>
 
-      <header className="App-header">
-        
-        <p>
-          Homepage
-        </p>
-        
-      </header>
     </div>
   );
 }

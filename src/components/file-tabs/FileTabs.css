@@ -1,0 +1,14 @@
+#file-list {
+    padding: 10px 20px;
+    border-bottom: 1px solid #aaaaaa;
+    width:100%;
+    overflow: hidden;
+}
+
+#file-list .bp3-tab-indicator {
+    display: none;
+}
+
+.close-tab {
+    margin-left:5px;
+}
