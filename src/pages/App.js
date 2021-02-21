@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useMemo } from 'react';
 
 import './App.css';
 import {NonIdealState} from '@blueprintjs/core';
@@ -6,6 +6,7 @@ import { MenuBar } from '../components/menu-bar';
 import { FileTabs } from '../components/file-tabs';
 import { File } from '../components/file';
 import { ShowHide } from '../components/show-hide';
+
 
 function App() {
 
@@ -15,7 +16,6 @@ function App() {
 
   function onFileOpen(file) {
 
-    //change the way this is set, it could lead to duplicates
     file.id = Date.now();
 
     setFiles([
@@ -58,7 +58,7 @@ function App() {
                 key={f.id}
                 evaluator={selectedFile != null && selectedFile.id === f.id}
                 show={(
-                  <File />
+                  <File file={f} />
                 )}
               />)
             })}

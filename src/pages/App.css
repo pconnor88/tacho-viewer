@@ -11,6 +11,7 @@
   min-height: 50px;
   width:100%;
   flex: 1;
+  display: flex;
 }
 
 .file-sections {
@@ -18,4 +19,11 @@
   background:#ffffff;
   border-right: 1px solid #aaaaaa;
   display: inline-block;
+  overflow: auto;
+}
+
+.file-section-content {
+  height:100%;
+  flex: 1;
+  overflow: auto;
 }

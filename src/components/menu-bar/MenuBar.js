@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Navbar, Popover, Menu, MenuItem, Position, Button, Alignment, FileInput, Intent, Spinner } from "@blueprintjs/core";
+import React, { useState, useMemo } from 'react';
+import { Navbar, Popover, Menu, MenuItem, Position, Button, Alignment, FileInput, Intent, Spinner, useHotkeys } from "@blueprintjs/core";
 import { OpenFileDialog } from '../open-file-dialog';
 import { Fragment } from "react";
 import './MenuBar.css';
@@ -16,6 +16,19 @@ export function MenuBar(props) {
     const [showOpenFileModal, setShowOpenFileModal] = useState(false);
     const [selectedFile, setSelectedFile] = useState("");
 
+    const hotkeys = useMemo(() => [
+        {
+            combo: "cmd+o",
+            global: true,
+            label: "Open file",
+            onKeyDown: (e) => {
+                openFileDialog();
+                e.preventDefault();
+            }
+        }
+    ], []);
+    const { handleKeyDown, handleKeyUp } = useHotkeys(hotkeys);
+
     function openFileDialog() {
         setShowOpenFileModal(true);
     }
@@ -26,11 +39,13 @@ export function MenuBar(props) {
             setSelectedFile(file.name);
             console.log(file);
             var reader = new FileReader();
-            reader.readAsText(file, "UTF-8");
-            reader.onload = function (evt) {
+            reader.readAsArrayBuffer(file);
+            reader.onload = function () {
+                var data = reader.result;
+                var bytes = new Uint8Array(data);
                 props.onFileOpen({
                     filename: file.name,
-                    binary: evt
+                    binary: bytes
                 });
                 setSelectedFile("");
                 setShowOpenFileModal(false);
@@ -43,7 +58,7 @@ export function MenuBar(props) {
 
     return (
         <Fragment>
-            <Navbar id="top-bar">
+            <Navbar id="top-bar" onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
                 <Navbar.Group align={Alignment.LEFT}>
                     <Navbar.Heading className="app-title">Tacho Viewer</Navbar.Heading>
                 </Navbar.Group>
